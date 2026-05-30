@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최석원 | Web Full-Stack Developer Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== Reset & Base ===== */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        color: #333;
+        background: #fff;
+        overflow-x: hidden;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* ===== Navigation ===== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 18px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.3s;
+      }
+      .navbar.scrolled {
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      }
+      .navbar .logo {
+        font-weight: 900;
+        font-size: 1.3rem;
+        letter-spacing: -1px;
+      }
+      .navbar .logo span {
+        color: #4f46e5;
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+      }
+      .nav-links a {
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: #555;
+        position: relative;
+        transition: color 0.3s;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #4f46e5;
+        transition: width 0.3s;
+      }
+      .nav-links a:hover {
+        color: #4f46e5;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* ===== Hero Section ===== */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 120px 20px 80px;
+        background: linear-gradient(
+          135deg,
+          #eef2ff 0%,
+          #faf5ff 50%,
+          #eff6ff 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(79, 70, 229, 0.08) 0%,
+          transparent 70%
+        );
+        top: -100px;
+        right: -100px;
+        border-radius: 50%;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      .hero .profile-img {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        display: block;
+        margin: 0 auto 28px;
+        box-shadow: 0 8px 30px rgba(79, 70, 229, 0.18);
+      }
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        letter-spacing: -2px;
+        margin-bottom: 12px;
+        color: #1e1b4b;
+      }
+      .hero .subtitle {
+        font-size: 1.2rem;
+        color: #6366f1;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+      .hero .description {
+        max-width: 520px;
+        margin: 0 auto 36px;
+        font-size: 1.05rem;
+        color: #64748b;
+        line-height: 1.8;
+      }
+      .btn {
+        display: inline-block;
+        padding: 14px 36px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        transition: all 0.3s;
+        cursor: pointer;
+        border: none;
+      }
+      .btn-primary {
+        background: #4f46e5;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(79, 70, 229, 0.35);
+      }
+      .btn-primary:hover {
+        background: #4338ca;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(79, 70, 229, 0.4);
+      }
+      .btn-outline {
+        background: transparent;
+        color: #4f46e5;
+        border: 2px solid #4f46e5;
+        margin-left: 12px;
+      }
+      .btn-outline:hover {
+        background: #4f46e5;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      /* ===== Section Common ===== */
+      section {
+        padding: 100px 20px;
+      }
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .section-title h2 {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #1e1b4b;
+        letter-spacing: -1px;
+        margin-bottom: 12px;
+      }
+      .section-title p {
+        color: #94a3b8;
+        font-size: 1rem;
+      }
+      .section-title .bar {
+        width: 50px;
+        height: 4px;
+        background: #4f46e5;
+        border-radius: 2px;
+        margin: 16px auto 0;
+      }
+
+      /* ===== About ===== */
+      .about {
+        background: #fff;
+      }
+      .about-grid {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 32px;
+      }
+      .info-card {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 32px;
+        border: 1px solid #e2e8f0;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .info-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
+      .info-card .icon {
+        font-size: 2rem;
+        margin-bottom: 16px;
+      }
+      .info-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e1b4b;
+        margin-bottom: 8px;
+      }
+      .info-card p {
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* ===== Skills ===== */
+      .skills {
+        background: #f8fafc;
+      }
+      .skills-container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .skill-item {
+        margin-bottom: 28px;
+      }
+      .skill-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .skill-header span {
+        font-weight: 700;
+        color: #1e1b4b;
+        font-size: 0.95rem;
+      }
+      .skill-header .percent {
+        color: #4f46e5;
+      }
+      .skill-bar {
+        width: 100%;
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .skill-fill {
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #6366f1, #4f46e5);
+        width: 0;
+        transition: width 1.2s ease;
+      }
+
+      /* ===== Timeline (Experience) ===== */
+      .experience {
+        background: #fff;
+      }
+      .timeline {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 40px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: #e2e8f0;
+        border-radius: 3px;
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 40px;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -33px;
+        top: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #4f46e5;
+        border: 3px solid #c7d2fe;
+      }
+      .timeline-item .date {
+        font-size: 0.85rem;
+        color: #6366f1;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .timeline-item h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1e1b4b;
+        margin-bottom: 6px;
+      }
+      .timeline-item p {
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* ===== Contact ===== */
+      .contact {
+        background: #f8fafc;
+      }
+      .contact-container {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      .contact-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fff;
+        padding: 16px 28px;
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .contact-card:hover {
+        border-color: #4f46e5;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(79, 70, 229, 0.12);
+      }
+      .contact-card .c-icon {
+        font-size: 1.5rem;
+      }
+      .contact-card .c-text {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #1e1b4b;
+      }
+
+      /* ===== Footer ===== */
+      footer {
+        text-align: center;
+        padding: 40px 20px;
+        background: #1e1b4b;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+      }
+      footer span {
+        color: #6366f1;
+        font-weight: 700;
+      }
+
+      /* ===== Detail Modal ===== */
+      .detail-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        animation: overlayFadeIn 0.25s ease;
+      }
+      .detail-modal-overlay.active {
+        display: flex;
+      }
+      .detail-modal {
+        background: #fff;
+        border-radius: 20px;
+        padding: 36px 32px 28px;
+        max-width: 480px;
+        width: 90%;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+        animation: modalSlideUp 0.3s ease;
+        text-align: center;
+      }
+      .modal-scroll-area {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 6px;
+        margin-bottom: 20px;
+      }
+      /* Custom Scrollbar */
+      .modal-scroll-area::-webkit-scrollbar {
+        width: 6px;
+      }
+      .modal-scroll-area::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+      }
+      .modal-scroll-area::-webkit-scrollbar-thumb {
+        background: #c7d2fe;
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
+      .modal-scroll-area::-webkit-scrollbar-thumb:hover {
+        background: #6366f1;
+      }
+      /* Firefox scrollbar */
+      .modal-scroll-area {
+        scrollbar-width: thin;
+        scrollbar-color: #c7d2fe #f1f5f9;
+      }
+      .detail-modal .modal-icon {
+        font-size: 2.4rem;
+        margin-bottom: 12px;
+      }
+      .detail-modal h3 {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #1e1b4b;
+        margin-bottom: 20px;
+      }
+      .detail-modal .modal-body {
+        text-align: left;
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        border: 1px solid #e2e8f0;
+      }
+      .detail-modal .modal-body:last-child {
+        margin-bottom: 4px;
+      }
+      .detail-modal .modal-body .modal-label {
+        display: inline-block;
+        background: #4f46e5;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+      }
+      .detail-modal .modal-body .modal-company {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #1e1b4b;
+        margin-bottom: 6px;
+      }
+      .detail-modal .modal-body .modal-period {
+        font-size: 0.9rem;
+        color: #6366f1;
+        font-weight: 600;
+      }
+      .detail-modal .modal-body .modal-desc {
+        font-size: 0.92rem;
+        color: #64748b;
+        line-height: 1.7;
+        margin-top: 8px;
+      }
+      .btn-confirm {
+        display: inline-block;
+        padding: 12px 48px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        background: #4f46e5;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+      }
+      .btn-confirm:hover {
+        background: #4338ca;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(79, 70, 229, 0.4);
+      }
+      @keyframes overlayFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes modalSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* ===== More Button (in card) ===== */
+      .info-card .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .info-card .card-header h3 {
+        margin-bottom: 0;
+      }
+      .btn-more {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #6366f1;
+        background: #eef2ff;
+        border: 1px solid #c7d2fe;
+        padding: 4px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.25s;
+        white-space: nowrap;
+      }
+      .btn-more:hover {
+        background: #4f46e5;
+        color: #fff;
+        border-color: #4f46e5;
+      }
+
+      /* ===== Scroll Animations ===== */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===== Responsive ===== */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+        .nav-links {
+          gap: 20px;
+        }
+        .nav-links a {
+          font-size: 0.85rem;
+        }
+        .navbar {
+          padding: 14px 20px;
+        }
+        section {
+          padding: 70px 16px;
+        }
+        .btn-outline {
+          margin-left: 0;
+          margin-top: 12px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+        .nav-links {
+          gap: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo"><span>&lt;</span>Portfolio<span>/&gt;</span></div>
+      <ul class="nav-links">
+        <li><a href="#about">소개</a></li>
+        <li><a href="#skills">기술</a></li>
+        <li><a href="#experience">경험</a></li>
+        <li><a href="#contact">연락처</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <img src="profile.jpg" alt="최석원 프로필 사진" class="profile-img" />
+        <h1>사용자들의 편의를 생각할 줄 아는 개발자 최석원 입니다.</h1>
+        <p class="subtitle">Web Full-Stack Developer</p>
+        <p class="description">
+          7년간 다양한 웹 서비스의 개발·운영을 담당해온 웹 개발자입니다.<br />
+          사용자 관점의 경험과 안정적인 서비스를 중요하게 생각하며 협업 중심의
+          개발을 지향합니다.
+        </p>
+        <div>
+          <a href="#contact" class="btn btn-primary">연락하기</a>
+          <a href="#about" class="btn btn-outline">더 알아보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="section-title fade-up">
+        <h2>About Me</h2>
+        <p>저에 대해 간단히 소개합니다</p>
+        <div class="bar"></div>
+      </div>
+      <div class="about-grid">
+        <div class="info-card fade-up">
+          <div class="icon">🎓</div>
+          <h3>학력</h3>
+          <p>세명대학교 정보통신학과<br />2011 - 2017 졸업</p>
+        </div>
+        <div class="info-card fade-up">
+          <div class="icon">💼</div>
+          <div class="card-header">
+            <h3>직장 경력 (4건)</h3>
+            <button class="btn-more" onclick="openDetailModal('career')">
+              더보기
+            </button>
+          </div>
+          <p>아시아나 아이디티<br />5년차 (2021 - 현재)</p>
+        </div>
+        <div class="info-card fade-up">
+          <div class="icon">📍</div>
+          <h3>거주지</h3>
+          <p>인천광역시 문화로<br />지역 관계없이 근무 가능</p>
+        </div>
+        <div class="info-card fade-up">
+          <div class="icon">🎯</div>
+          <div class="card-header">
+            <h3>프로젝트 (11건)</h3>
+            <button class="btn-more" onclick="openDetailModal('project')">
+              더보기
+            </button>
+          </div>
+          <p>아시아나 항공 대한항공 합병 관련 GAP 개발 프로젝트</p>
+        </div>
+        <div class="info-card fade-up">
+          <div class="icon">🌐</div>
+          <h3>자격증</h3>
+          <p>SQLD<br />정보처리기사</p>
+        </div>
+        <div class="info-card fade-up">
+          <div class="icon">🎨</div>
+          <h3>취미</h3>
+          <p>헬스, 요리<br />러닝, 산책</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills" id="skills">
+      <div class="section-title fade-up">
+        <h2>Skills</h2>
+        <p>주요 기술 스택을 소개합니다</p>
+        <div class="bar"></div>
+      </div>
+      <div class="skills-container">
+        <div class="skill-item fade-up">
+          <div class="skill-header">
+            <span>JSP / HTML / CSS</span>
+            <span class="percent">95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="95"></div>
+          </div>
+        </div>
+        <div class="skill-item fade-up">
+          <div class="skill-header">
+            <span>JavaScript / TypeScript</span>
+            <span class="percent">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="90"></div>
+          </div>
+        </div>
+        <div class="skill-item fade-up">
+          <div class="skill-header">
+            <span>React / Next.js</span>
+            <span class="percent">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="85"></div>
+          </div>
+        </div>
+        <div class="skill-item fade-up">
+          <div class="skill-header">
+            <span>Node.js</span>
+            <span class="percent">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="75"></div>
+          </div>
+        </div>
+        <div class="skill-item fade-up">
+          <div class="skill-header">
+            <span>Figma / Design</span>
+            <span class="percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="80"></div>
+          </div>
+        </div>
+        <div class="skill-item fade-up">
+          <div class="skill-header">
+            <span>Git / DevOps</span>
+            <span class="percent">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="70"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience" id="experience">
+      <div class="section-title fade-up">
+        <h2>Experience</h2>
+        <p>경험과 이력을 소개합니다</p>
+        <div class="bar"></div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item fade-up">
+          <div class="date">2022.07 - 현재</div>
+          <h3>OO기업 · 프론트엔드 개발자</h3>
+          <p>
+            React 기반의 대시보드 및 고객 서비스 웹 애플리케이션을 개발하고
+            유지보수합니다. 디자인 시스템 구축 및 성능 최적화에 기여했습니다.
+          </p>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="date">2021.06 - 2022.02</div>
+          <h3>△△스타트업 · 인턴 개발자</h3>
+          <p>
+            Vue.js를 활용한 어드민 패널 개발에 참여했습니다. REST API 연동 및
+            반응형 UI 구현을 담당했습니다.
+          </p>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="date">2020.03 - 2021.05</div>
+          <h3>개인 프로젝트 · 포트폴리오 & 블로그</h3>
+          <p>
+            Next.js와 Tailwind CSS를 활용하여 개인 블로그를 개발하고
+            운영했습니다. 월 평균 3,000명의 방문자를 기록했습니다.
+          </p>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="date">2018.03 - 2022.02</div>
+          <h3>OO대학교 · 컴퓨터공학과</h3>
+          <p>
+            컴퓨터 과학 기초, 자료구조, 알고리즘, 웹 프로그래밍 등을 학습하며
+            여러 팀 프로젝트를 수행했습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="section-title fade-up">
+        <h2>Contact</h2>
+        <p>아래 방법으로 연락주세요</p>
+        <div class="bar"></div>
+      </div>
+      <div class="contact-container fade-up">
+        <p style="color: #64748b; line-height: 1.8; margin-bottom: 10px">
+          프로젝트 협업이나 커피챗 등 편하게 연락 주세요!<br />
+          빠른 시일 내에 답변 드리겠습니다.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:csw2224@naver.com" class="contact-card">
+            <span class="c-icon">📧</span>
+            <span class="c-text">csw2224@naver.com</span>
+          </a>
+          <a href="https://github.com" target="_blank" class="contact-card">
+            <span class="c-icon">🐙</span>
+            <span class="c-text">GitHub</span>
+          </a>
+          <a href="tel:010-9551-1301" class="contact-card">
+            <span class="c-icon">📱</span>
+            <span class="c-text">010-9551-1301</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Modals -->
+    <!-- 직장 경력 모달 -->
+    <div class="detail-modal-overlay" id="modal-career">
+      <div class="detail-modal">
+        <div class="modal-icon">💼</div>
+        <h3>직장 경력 (4건)</h3>
+        <div class="modal-scroll-area">
+          <div class="modal-body">
+            <span class="modal-label">재직중</span>
+            <div class="modal-company">아시아나아이디티</div>
+            <div class="modal-period">2021.08.16 - 재직중 | 정규직</div>
+            <div class="modal-desc">
+              아시아나 항공 웹 서비스 개발 및 운영을 담당하고 있습니다.<br />
+              홈페이지, 기업우대, 마일리지 등 다양한 프로젝트에서<br />
+              PL 및 풀스택 개발자로 활동하고 있습니다.
+            </div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">퇴사</span>
+            <div class="modal-company">케이엘정보통신</div>
+            <div class="modal-period">2019.05.01 ~ 2021.08.13 | 정규직</div>
+            <div class="modal-desc">
+              인천시교육청 학교통합홈페이지 유지보수 및<br />
+              다수 교육기관 홈페이지 구축 프로젝트를<br />
+              PL 및 개발자로 수행했습니다.
+            </div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">퇴사</span>
+            <div class="modal-company">모렌소프트</div>
+            <div class="modal-period">2018.10.01 ~ 2019.03.06 | 정규직</div>
+            <div class="modal-desc">
+              쇼핑몰(B2C) 및 기업 대표 홈페이지 구축<br />
+              프로젝트에 개발자로 참여했습니다.
+            </div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">퇴사</span>
+            <div class="modal-company">행솔</div>
+            <div class="modal-period">2017.03.28 ~ 2018.01.31 | 정규직</div>
+            <div class="modal-desc">
+              인천공항공사 화상회의 시스템 구축 프로젝트에<br />
+              개발자로 참여하여 웹 개발 경력을 시작했습니다.
+            </div>
+          </div>
+        </div>
+        <button class="btn-confirm" onclick="closeDetailModal('career')">
+          확인
+        </button>
+      </div>
+    </div>
+
+    <!-- 프로젝트 모달 -->
+    <div class="detail-modal-overlay" id="modal-project">
+      <div class="detail-modal">
+        <div class="modal-icon">🎯</div>
+        <h3>프로젝트 (11건)</h3>
+        <div class="modal-scroll-area">
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              아시아나 항공 대한항공 합병 관련<br />GAP 개발 프로젝트
+            </div>
+            <div class="modal-period">2025.09 ~ 2025.12 | PL</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              아시아나 항공 홈페이지 e-voucher<br />단일 사용 개발 프로젝트
+            </div>
+            <div class="modal-period">2025.09 ~ 2025.12 | PL</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              아시아나 항공 홈페이지 마일리지<br />좌석 조회 개발 프로젝트
+            </div>
+            <div class="modal-period">2025.04 ~ 2025.07 | 개발자</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              아시아나 항공 EMD(수하물/좌석)<br />VOID 기능 개발 프로젝트
+            </div>
+            <div class="modal-period">2023.09 ~ 2024.02 | PL</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              항공 기업우대 홈페이지 프로그램<br />해외지역 확대를 위한 시스템
+              구축 프로젝트
+            </div>
+            <div class="modal-period">2023.09 ~ 2024.02 | PL</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              2020년 인천시교육청 학교통합홈페이지<br />유지보수 용역 프로젝트
+            </div>
+            <div class="modal-period">2020.01 ~ 2021.08 | PL,개발자</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              인천시교육청 인천수학교육 홈페이지. 구축 프로젝트
+            </div>
+            <div class="modal-period">2020.10 ~ 2020.12 | PL,개발자</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              인천시교육청 학생안전체험관 홈페이지 구축
+            </div>
+            <div class="modal-period">2020.01 ~ 2020.04 | PL,개발자</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">2019년 학교통합홈페이지 재구축사업</div>
+            <div class="modal-period">2019.05 ~ 2019.12 | PL,개발자</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              진승무역 대표홈페이지 및 쇼핑몰(B2C) 구축 프로젝트
+            </div>
+            <div class="modal-period">2018.11 ~ 2019.03 | 개발자</div>
+          </div>
+          <div class="modal-body">
+            <span class="modal-label">종료</span>
+            <div class="modal-company">
+              인천공항공사 화상회의 시스템 구축 프로젝트
+            </div>
+            <div class="modal-period">2017.03 ~ 2018.01 | 개발자</div>
+          </div>
+        </div>
+        <button class="btn-confirm" onclick="closeDetailModal('project')">
+          확인
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 <span>최석원</span>. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Navbar scroll shadow
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+      });
+
+      // Scroll fade-up animation (Intersection Observer)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              // stagger animation delay
+              setTimeout(() => {
+                entry.target.classList.add("visible");
+              }, index * 80);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      document
+        .querySelectorAll(".fade-up")
+        .forEach((el) => observer.observe(el));
+
+      // Skill bar animation
+      const skillObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const fill = entry.target;
+              fill.style.width = fill.dataset.width + "%";
+              skillObserver.unobserve(fill);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      document
+        .querySelectorAll(".skill-fill")
+        .forEach((el) => skillObserver.observe(el));
+
+      // Detail modal open / close
+      function openDetailModal(type) {
+        const modal = document.getElementById("modal-" + type);
+        if (modal) {
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+      }
+      function closeDetailModal(type) {
+        const modal = document.getElementById("modal-" + type);
+        if (modal) {
+          modal.classList.remove("active");
+          document.body.style.overflow = "";
+        }
+      }
+      // 오버레이(배경) 클릭 시에도 닫기
+      document.querySelectorAll(".detail-modal-overlay").forEach((overlay) => {
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) {
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
